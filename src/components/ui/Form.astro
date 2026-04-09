@@ -5,7 +5,7 @@ import Button from '~/components/ui/Button.astro';
 const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } = Astro.props;
 ---
 
-<form>
+<form data-contact-form>
   {
     inputs &&
       inputs.map(
@@ -23,6 +23,7 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
                 id={name}
                 autocomplete={autocomplete}
                 placeholder={placeholder}
+                required={name === 'name' || name === 'email'}
                 class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
               />
             </div>
@@ -41,6 +42,7 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
           name={textarea.name ? textarea.name : 'message'}
           rows={textarea.rows ? textarea.rows : 4}
           placeholder={textarea.placeholder}
+          required
           class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
         />
       </div>
@@ -70,7 +72,7 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
   {
     button && (
       <div class="mt-10 grid">
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" data-contact-submit>
           {button}
         </Button>
       </div>
@@ -84,4 +86,60 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
       </div>
     )
   }
+
+  <p data-contact-status class="mt-4 text-sm hidden" role="status" aria-live="polite"></p>
 </form>
+
+<script>
+  const form = document.querySelector('[data-contact-form]');
+  const statusEl = document.querySelector('[data-contact-status]');
+  const submitBtn = document.querySelector('[data-contact-submit]');
+
+  if (form instanceof HTMLFormElement && statusEl instanceof HTMLElement) {
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const payload = {
+        name: String(formData.get('name') || '').trim(),
+        email: String(formData.get('email') || '').trim(),
+        message: String(formData.get('message') || '').trim(),
+      };
+
+      statusEl.classList.remove('hidden', 'text-red-600', 'text-green-600', 'dark:text-red-400', 'dark:text-green-400');
+      statusEl.classList.add('text-gray-600', 'dark:text-gray-300');
+      statusEl.textContent = 'Sending...';
+
+      if (submitBtn instanceof HTMLButtonElement) {
+        submitBtn.disabled = true;
+      }
+
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result?.ok) {
+          throw new Error(result?.message || 'Failed to send message');
+        }
+
+        statusEl.classList.remove('text-gray-600', 'dark:text-gray-300');
+        statusEl.classList.add('text-green-600', 'dark:text-green-400');
+        statusEl.textContent = 'Message sent successfully. We will contact you soon.';
+        form.reset();
+      } catch (error) {
+        statusEl.classList.remove('text-gray-600', 'dark:text-gray-300');
+        statusEl.classList.add('text-red-600', 'dark:text-red-400');
+        statusEl.textContent = 'Failed to send message. Please try again later.';
+      } finally {
+        if (submitBtn instanceof HTMLButtonElement) {
+          submitBtn.disabled = false;
+        }
+      }
+    });
+  }
+</script>
