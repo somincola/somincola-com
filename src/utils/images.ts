@@ -1,6 +1,23 @@
 import { isUnpicCompatible, unpicOptimizer, astroAssetsOptimizer } from './images-optimization';
 import type { ImageMetadata } from 'astro';
-import type { OpenGraph } from '@astrolib/seo';
+
+export interface OpenGraphMedia {
+  url: string;
+  width?: number;
+  height?: number;
+  alt?: string;
+}
+
+export interface OpenGraph {
+  url?: string;
+  type?: string;
+  title?: string;
+  description?: string;
+  images?: ReadonlyArray<OpenGraphMedia>;
+  locale?: string;
+  site_name?: string;
+  siteName?: string;
+}
 
 const load = async function () {
   let images: Record<string, () => Promise<unknown>> | undefined = undefined;
@@ -71,7 +88,7 @@ export const adaptOpenGraphImages = async (
           };
         }
 
-        let _image;
+        let _image: Awaited<ReturnType<typeof astroAssetsOptimizer>>[number] | undefined;
 
         if (
           typeof resolvedImage === 'string' &&

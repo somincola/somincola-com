@@ -131,7 +131,7 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
         statusEl.classList.add('text-green-600', 'dark:text-green-400');
         statusEl.textContent = 'Message sent successfully. We will contact you soon.';
         form.reset();
-      } catch (error) {
+      } catch {
         statusEl.classList.remove('text-gray-600', 'dark:text-gray-300');
         statusEl.classList.add('text-red-600', 'dark:text-red-400');
         statusEl.textContent = 'Failed to send message. Please try again later.';
