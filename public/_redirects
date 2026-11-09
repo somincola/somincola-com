@@ -1,0 +1,9 @@
+# Legacy URLs from the previous site
+/services        /about     301
+/blog            /          301
+/blog/*          /          301
+/category/*      /          301
+/tag/*           /          301
+/rss.xml         /          301
+/decapcms        /          301
+/decapcms/*      /          301

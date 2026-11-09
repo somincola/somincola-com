@@ -1,122 +1,64 @@
 ---
-title: 'Terms and Conditions'
-layout: '~/layouts/MarkdownLayout.astro'
+layout: ~/layouts/Legal.astro
+title: Terms of Service
+description: The terms that govern use of somincola.com and products and services provided by Somincola LLC.
+updated: November 9, 2026
 ---
 
-_Last updated_: December 15, 2024
+These Terms of Service (“Terms”) govern your use of **somincola.com** (the “Website”) and of the products and services provided by Somincola LLC, a Wyoming limited liability company (“Somincola”, “we”, “us”). By using the Website or our services, you agree to these Terms. If you do not agree, please do not use them.
 
-Please read these terms and conditions carefully before using Somincola's services.
+Some products have additional terms — for example, apps distributed through the Apple App Store are also subject to Apple’s Licensed Application End User License Agreement. If product-specific terms conflict with these Terms, the product-specific terms apply to that product.
 
-## Interpretation and Definitions
+## Using our services
 
-### Interpretation
+You agree to use our Website and services lawfully and not to misuse them — including by interfering with their operation, attempting to access them without authorization, or using them to send spam or harmful content. Community services we operate, such as m.somincola.org, have their own rules that you must also follow.
 
-The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.
+## Accounts
 
-### Definitions
+If a service requires an account, you are responsible for keeping your credentials secure and for activity under your account. Tell us promptly if you believe your account has been compromised.
 
-For the purposes of these Terms and Conditions:
+## Purchases and payments
 
-- **Client** means an individual or business entity that engages Somincola's professional services.
+Prices are shown at the point of sale and may change from time to time. Purchases made directly from us are processed securely by Stripe. In-app purchases and subscriptions bought through the Apple App Store are billed, managed and renewed by Apple.
 
-- **Country** refers to: Wyoming, United States
+## Subscriptions and cancellation
 
-- **Company** (referred to as either "the Company", "Somincola", "We", "Us" or "Our" in this Agreement) refers to Somincola, located at 30 N Gould St Ste N, Sheridan, WY 82801 US.
+Where we offer a subscription, it renews automatically at the end of each billing period until cancelled. You can cancel at any time and will keep access until the end of the current period. App Store subscriptions are managed in your Apple account settings.
 
-- **Device** means any device that can access our services such as a computer, a cellphone or a digital tablet.
+## Refunds
 
-- **Services** refers to our professional business consulting, financial services, and related business solutions.
+For purchases made through the Apple App Store, refunds are handled by Apple — you can request one at [reportaproblem.apple.com](https://reportaproblem.apple.com). For purchases made directly from us, contact [contact@somincola.com](mailto:contact@somincola.com) within 14 days of purchase and we will review your request in good faith. Nothing in these Terms limits any refund rights you have under applicable consumer law.
 
-- **Terms and Conditions** (also referred as "Terms") mean these Terms and Conditions that form the entire agreement between you and Somincola regarding the use of our services.
+## Intellectual property
 
-- **Third-party Service** means any services or content provided by a third-party that may be used in connection with our services.
+The Website, our products and their content, design and trademarks belong to Somincola or its licensors. We grant you a limited, non-exclusive, non-transferable license to use our products for their intended purpose. Content you create remains yours.
 
-- **Website** refers to Somincola's website, accessible from [https://somincola.com](https://somincola.com)
+## Third-party services
 
-- **You** means the individual accessing or using our services, or the company, or other legal entity on behalf of which such individual is accessing or using our services, as applicable.
+Our services may link to or interoperate with third-party services, including the decentralized Mastodon network. We are not responsible for third-party content or services, which are governed by their own terms.
 
-## Acknowledgment
+## Disclaimers
 
-These are the Terms and Conditions governing the use of Somincola's services and the agreement that operates between you and Somincola. These Terms and Conditions set out the rights and obligations of all clients regarding the use of our services.
+Our Website and services are provided “as is” and “as available”, without warranties of any kind to the fullest extent permitted by law, including implied warranties of merchantability, fitness for a particular purpose and non-infringement.
 
-Your access to and use of our services is conditioned on your acceptance of and compliance with these Terms and Conditions. These Terms and Conditions apply to all visitors, clients and others who access or use our services.
+## Limitation of liability
 
-By accessing or using our services you agree to be bound by these Terms and Conditions. If you disagree with any part of these Terms and Conditions then you may not access our services.
-
-You represent that you are over the age of 18 or are a legal business entity. Somincola does not provide services to individuals under 18.
-
-Your access to and use of our services is also conditioned on your acceptance of and compliance with our Privacy Policy. Our Privacy Policy describes our policies and procedures on the collection, use and disclosure of your personal information when you use our services and tells you about your privacy rights and how the law protects you. Please read our Privacy Policy carefully before using our services.
-
-## Links to Other Websites
-
-Our Service may contain links to third-party web sites or services that are not owned or controlled by the Company.
-
-The Company has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that the Company shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any such content, goods or services available on or through any such web sites or services.
-
-We strongly advise You to read the terms and conditions and privacy policies of any third-party web sites or services that You visit.
+To the fullest extent permitted by law, Somincola will not be liable for any indirect, incidental, special, consequential or punitive damages, or for any loss of profits, data or goodwill. Our total liability for any claim relating to our services is limited to the greater of the amount you paid us in the twelve months before the claim or US $100.
 
 ## Termination
 
-We may terminate or suspend Your access immediately, without prior notice or liability, for any reason whatsoever, including without limitation if You breach these Terms and Conditions.
+We may suspend or end your access to our services if you violate these Terms. You may stop using our services at any time.
 
-Upon termination, Your right to use the Service will cease immediately.
+## Governing law
 
-## Limitation of Liability
+These Terms are governed by the laws of the State of Wyoming, United States, without regard to its conflict-of-law rules. If you are a consumer, you may also benefit from mandatory protections of the laws where you live.
 
-Notwithstanding any damages that You might incur, the entire liability of the Company and any of its suppliers under any provision of this Terms and Your exclusive remedy for all of the foregoing shall be limited to the amount actually paid by You through the Service or 100 USD if You haven't purchased anything through the Service.
+## Changes
 
-To the maximum extent permitted by applicable law, in no event shall the Company or its suppliers be liable for any special, incidental, indirect, or consequential damages whatsoever (including, but not limited to, damages for loss of profits, loss of data or other information, for business interruption, for personal injury, loss of privacy arising out of or in any way related to the use of or inability to use the Service, third-party software and/or third-party hardware used with the Service, or otherwise in connection with any provision of this Terms), even if the Company or any supplier has been advised of the possibility of such damages and even if the remedy fails of its essential purpose.
+We may update these Terms from time to time. We will post the new version on this page and update the date above. Continued use after changes take effect means you accept the updated Terms.
 
-Some states do not allow the exclusion of implied warranties or limitation of liability for incidental or consequential damages, which means that some of the above limitations may not apply. In these states, each party's liability will be limited to the greatest extent permitted by law.
+## Contact
 
-## "AS IS" and "AS AVAILABLE" Disclaimer
-
-The Service is provided to You "AS IS" and "AS AVAILABLE" and with all faults and defects without warranty of any kind. To the maximum extent permitted under applicable law, the Company, on its own behalf and on behalf of its Affiliates and its and their respective licensors and service providers, expressly disclaims all warranties, whether express, implied, statutory or otherwise, with respect to the Service, including all implied warranties of merchantability, fitness for a particular purpose, title and non-infringement, and warranties that may arise out of course of dealing, course of performance, usage or trade practice. Without limitation to the foregoing, the Company provides no warranty or undertaking, and makes no representation of any kind that the Service will meet Your requirements, achieve any intended results, be compatible or work with any other software, applications, systems or services, operate without interruption, meet any performance or reliability standards or be error free or that any errors or defects can or will be corrected.
-
-Without limiting the foregoing, neither the Company nor any of the company's provider makes any representation or warranty of any kind, express or implied: (i) as to the operation or availability of the Service, or the information, content, and materials or products included thereon; (ii) that the Service will be uninterrupted or error-free; (iii) as to the accuracy, reliability, or currency of any information or content provided through the Service; or (iv) that the Service, its servers, the content, or e-mails sent from or on behalf of the Company are free of viruses, scripts, trojan horses, worms, malware, timebombs or other harmful components.
-
-Some jurisdictions do not allow the exclusion of certain types of warranties or limitations on applicable statutory rights of a consumer, so some or all of the above exclusions and limitations may not apply to You. But in such a case the exclusions and limitations set forth in this section shall be applied to the greatest extent enforceable under applicable law.
-
-## Governing Law
-
-The laws of the Country, excluding its conflicts of law rules, shall govern this Terms and Your use of the Service. Your use of the Application may also be subject to other local, state, national, or international laws.
-
-## Disputes Resolution
-
-If You have any concern or dispute about the Service, You agree to first try to resolve the dispute informally by contacting the Company.
-
-## For European Union (EU) Users
-
-If You are a European Union consumer, you will benefit from any mandatory provisions of the law of the country in which you are resident in.
-
-## United States Legal Compliance
-
-You represent and warrant that (i) You are not located in a country that is subject to the United States government embargo, or that has been designated by the United States government as a "terrorist supporting" country, and (ii) You are not listed on any United States government list of prohibited or restricted parties.
-
-## Severability and Waiver
-
-### Severability
-
-If any provision of these Terms is held to be unenforceable or invalid, such provision will be changed and interpreted to accomplish the objectives of such provision to the greatest extent possible under applicable law and the remaining provisions will continue in full force and effect.
-
-### Waiver
-
-Except as provided herein, the failure to exercise a right or to require performance of an obligation under these Terms shall not effect a party's ability to exercise such right or require such performance at any time thereafter nor shall the waiver of a breach constitute a waiver of any subsequent breach.
-
-## Translation Interpretation
-
-These Terms and Conditions may have been translated if We have made them available to You on our Service. You agree that the original English text shall prevail in the case of a dispute.
-
-## Changes to These Terms and Conditions
-
-We reserve the right, at Our sole discretion, to modify or replace these Terms at any time. If a revision is material We will make reasonable efforts to provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at Our sole discretion.
-
-By continuing to access or use Our Service after those revisions become effective, You agree to be bound by the revised terms. If You do not agree to the new terms, in whole or in part, please stop using the website and the Service.
-
-## Contact Us
-
-If you have any questions about these Terms and Conditions, you can contact us:
-
-- By email: contact@somincola.com
-- By mail: 30 N Gould St Ste N, Sheridan, WY 82801 US
-- Business hours: Monday - Friday: 9:00 AM - 5:00 PM (MST)
+Somincola LLC
+30 N Gould St Ste N, Sheridan, WY 82801, United States
+[contact@somincola.com](mailto:contact@somincola.com)

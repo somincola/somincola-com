@@ -1,0 +1,86 @@
+---
+import Logo from '~/components/Logo.astro';
+import { SITE, PRODUCTS, fullAddress } from '~/site';
+
+const year = new Date().getFullYear();
+
+const columns = [
+  {
+    title: 'Studio',
+    links: [
+      { label: 'Work', href: '/#work' },
+      { label: 'Approach', href: '/#approach' },
+      { label: 'About', href: '/about' },
+      { label: 'Contact', href: '/contact' },
+    ],
+  },
+  {
+    title: 'Products',
+    links: [
+      ...PRODUCTS.map((p) => ({ label: p.fullName, href: p.href })),
+      { label: 'System status', href: 'https://status.somincola.org' },
+    ],
+  },
+  {
+    title: 'Legal',
+    links: [
+      { label: 'Privacy Policy', href: '/privacy' },
+      { label: 'Terms of Service', href: '/terms' },
+    ],
+  },
+];
+---
+
+<footer class="relative mt-32 border-t border-line">
+  <div class="container-site grid gap-14 py-16 md:grid-cols-12 md:py-20">
+    <div class="md:col-span-5">
+      <Logo />
+      <p class="mt-6 max-w-sm text-sm leading-relaxed text-muted">
+        {SITE.description}
+      </p>
+      <a href={`mailto:${SITE.email}`} class="link-underline mt-6 inline-block text-sm">{SITE.email}</a>
+    </div>
+
+    {
+      columns.map((col) => (
+        <div class="md:col-span-2 [&:nth-child(2)]:md:col-start-7">
+          <h2 class="eyebrow">{col.title}</h2>
+          <ul class="mt-5 space-y-3 text-sm">
+            {col.links.map((link) => {
+              const external = link.href.startsWith('http');
+              return (
+                <li>
+                  <a
+                    href={link.href}
+                    class="link-underline text-ink/80 hover:text-ink"
+                    {...(external ? { target: '_blank', rel: 'noopener' } : {})}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="container-site">
+    <p
+      class="display select-none pb-2 text-[22vw] leading-[0.8] text-ink/[0.06] md:text-[15.5vw] xl:text-[12.5rem]"
+      aria-hidden="true"
+    >
+      Somincola
+    </p>
+  </div>
+
+  <div class="border-t border-line">
+    <div
+      class="container-site flex flex-col gap-2 py-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>© {year} {SITE.legalName}. All rights reserved.</p>
+      <p>A Wyoming limited liability company · {fullAddress}</p>
+    </div>
+  </div>
+</footer>

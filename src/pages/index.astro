@@ -1,258 +1,287 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
+import Base from '~/layouts/Base.astro';
+import PhonePlate from '~/components/home/PhonePlate.astro';
+import NetworkPlate from '~/components/home/NetworkPlate.astro';
+import { SITE, PRODUCTS, fullAddress } from '~/site';
 
-import Hero from '~/components/widgets/Hero.astro';
-import Note from '~/components/widgets/Note.astro';
-import Features from '~/components/widgets/Features.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Content from '~/components/widgets/Content.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import Stats from '~/components/widgets/Stats.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
+const principles = [
+  {
+    title: 'Focus',
+    body: 'We build a small number of products and give each one our full attention. Fewer features, better made.',
+  },
+  {
+    title: 'Privacy by default',
+    body: 'No advertising, no third-party trackers, no data brokers. We collect only what a product needs to work.',
+  },
+  {
+    title: 'Native craft',
+    body: 'Software that feels at home on its platform — fast, accessible, and considered down to the last detail.',
+  },
+  {
+    title: 'Built to last',
+    body: 'Independent and sustainably funded by the people who use our products, not by investors or advertisers.',
+  },
+];
 
-const metadata = {
-  title: 'Somincola — Custom SaaS Development & Technology Consulting',
-  ignoreTitleTemplate: true,
-};
+const capabilities = [
+  { area: 'Apple platforms', detail: 'Native iOS and macOS apps in Swift and SwiftUI' },
+  { area: 'Open social web', detail: 'ActivityPub and Mastodon clients, servers and integrations' },
+  { area: 'Web', detail: 'Fast, accessible websites and web apps in TypeScript' },
+  { area: 'Infrastructure', detail: 'Self-hosted services, edge delivery and reliable operations' },
+];
+
+const plates = { Moro: PhonePlate, 'm.somincola.org': NetworkPlate } as const;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${SITE.url}/#organization`,
+    name: SITE.name,
+    legalName: SITE.legalName,
+    url: SITE.url,
+    logo: `${SITE.url}/icon-512.png`,
+    description: SITE.description,
+    email: SITE.email,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: SITE.address.street,
+      addressLocality: SITE.address.locality,
+      addressRegion: SITE.address.region,
+      postalCode: SITE.address.postalCode,
+      addressCountry: SITE.address.country,
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      email: SITE.email,
+      availableLanguage: ['English', 'Chinese'],
+    },
+    sameAs: PRODUCTS.map((p) => p.href),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE.url}/#website`,
+    url: SITE.url,
+    name: SITE.name,
+    inLanguage: 'en',
+    publisher: { '@id': `${SITE.url}/#organization` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'MobileApplication',
+    name: 'Moro for Mastodon',
+    operatingSystem: 'iOS',
+    applicationCategory: 'SocialNetworkingApplication',
+    url: 'https://getmoro.app',
+    author: { '@id': `${SITE.url}/#organization` },
+  },
+];
 ---
 
-<Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
-
-  <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Contact Us',
-        href: '/contact',
-        icon: 'tabler:mail',
-      },
-      { text: 'Learn more', href: '#features' },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Professional Business Services',
-    }}
-  >
-    <Fragment slot="title">
-      Custom SaaS Solutions <span class="hidden xl:inline">&</span>
-      <span class="text-accent dark:text-white"> Technology Consulting</span>
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        <span class="font-semibold">Somincola</span> delivers cutting-edge SaaS applications and strategic technology consulting
-        to accelerate your digital transformation.</span
+<Base
+  description="Somincola is an independent software studio crafting focused, privacy-respecting apps for Apple platforms and the open social web. Makers of Moro for Mastodon."
+  jsonLd={jsonLd}
+>
+  <!-- Hero -->
+  <section class="grain relative isolate overflow-hidden pb-24 pt-36 sm:pb-32 sm:pt-44 lg:pt-52">
+    <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+      <div
+        class="absolute -right-[10%] -top-[20%] h-[42rem] w-[42rem] animate-drift rounded-full bg-[radial-gradient(circle_at_center,rgb(var(--accent)/0.20),transparent_62%)] blur-3xl"
       >
-      <span class="block mb-1 sm:hidden font-bold text-blue-600">Somincola: Your Technology Partner.</span>
-      From custom software development to cloud architecture consulting, we empower businesses with innovative technology
-      solutions that drive growth and efficiency.
-    </Fragment>
-  </Hero>
-
-  <!-- Note Widget ******************* -->
-
-  <Note
-    title="Our Mission:"
-    description="Transforming businesses through innovative SaaS solutions, cutting-edge technology, and strategic consulting expertise"
-  />
-
-  <!-- Features Widget *************** -->
-
-  <Features
-    id="features"
-    tagline="Solutions"
-    title="What you get with Somincola"
-    subtitle="Cutting-edge SaaS development and technology consulting services designed to accelerate your digital transformation and drive business growth through innovative solutions."
-    items={[
-      {
-        title: 'Custom SaaS Development',
-        description:
-          'End-to-end development of scalable SaaS applications tailored to your business requirements, from MVP to enterprise-grade solutions.',
-        icon: 'tabler:cloud',
-      },
-      {
-        title: 'Cloud Architecture & DevOps',
-        description:
-          'Expert cloud infrastructure design, implementation, and optimization using AWS, Azure, and GCP with modern DevOps practices.',
-        icon: 'tabler:server',
-      },
-      {
-        title: 'API Development & Integration',
-        description:
-          'RESTful and GraphQL API development, third-party integrations, and microservices architecture for seamless connectivity.',
-        icon: 'tabler:api',
-      },
-      {
-        title: 'Digital Transformation Consulting',
-        description:
-          'Strategic technology roadmaps, process optimization, and digital workflow transformation to modernize your operations.',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Data Analytics & AI Solutions',
-        description:
-          'Business intelligence dashboards, data pipeline development, and AI-powered analytics to drive data-driven decisions.',
-        icon: 'tabler:chart-dots',
-      },
-      {
-        title: 'Technical Support & Maintenance',
-        description:
-          '24/7 technical support, system monitoring, performance optimization, and ongoing maintenance for your SaaS solutions.',
-        icon: 'tabler:tools',
-      },
-    ]}
-  />
-
-  <!-- Content Widget **************** -->
-
-  <Content
-    isReversed
-    tagline="Our Expertise"
-    title="Why Tech Leaders Choose Somincola"
-    items={[
-      {
-        title: 'Cutting-Edge Technology Stack',
-        description:
-          'Leveraging the latest technologies including React, Node.js, Python, AWS, Kubernetes, and modern frameworks to build scalable solutions.',
-      },
-      {
-        title: 'Proven Development Methodology',
-        description:
-          'Agile development practices, continuous integration/deployment, and comprehensive testing ensure reliable, high-quality deliverables.',
-      },
-      {
-        title: 'Scalable Architecture Design',
-        description:
-          'Microservices, serverless computing, and cloud-native architectures that grow with your business and handle enterprise-level demands.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Software Development Team',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Built on innovation and expertise
-      </h3>
-      Partner with technology experts who understand modern software architecture and business scalability
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!-- Steps Widget ****************** -->
-
-  <Steps
-    title="Our SaaS Development Process"
-    items={[
-      {
-        title: 'Step 1: <span class="font-medium">Discovery & Planning</span>',
-        description:
-          'In-depth analysis of your requirements, user research, technical architecture planning, and project roadmap development.',
-        icon: 'tabler:search',
-      },
-      {
-        title: 'Step 2: <span class="font-medium">Design & Development</span>',
-        description:
-          'UI/UX design, agile development sprints, continuous testing, and iterative feedback integration to build your SaaS solution.',
-        icon: 'tabler:code',
-      },
-      {
-        title: 'Step 3: <span class="font-medium">Deployment & Launch</span>',
-        description:
-          'Cloud infrastructure setup, security implementation, performance optimization, and seamless production deployment.',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Step 4: <span class="font-medium">Scale & Optimize</span>',
-        description:
-          'Ongoing monitoring, feature enhancements, performance scaling, and technical support to ensure continued success.',
-        icon: 'tabler:trending-up',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80',
-      alt: 'SaaS Development Process',
-    }}
-  />
-
-  <!-- FAQs Widget ******************* -->
-
-  <FAQs
-    title="Frequently Asked Questions"
-    subtitle="Common questions about Somincola's SaaS development and technology consulting services."
-    tagline="FAQs"
-    classes={{ container: 'max-w-6xl' }}
-    items={[
-      {
-        title: 'What types of SaaS applications do you develop?',
-        description:
-          'We develop a wide range of SaaS solutions including CRM systems, project management tools, e-commerce platforms, data analytics dashboards, API platforms, and custom business applications tailored to specific industry needs.',
-      },
-      {
-        title: 'What technologies do you use for development?',
-        description:
-          'We use modern, proven technologies including React, Vue.js, Node.js, Python, PostgreSQL, MongoDB, AWS, Azure, Docker, Kubernetes, and various AI/ML frameworks. Our technology choices depend on your specific requirements and scalability needs.',
-      },
-      {
-        title: 'How long does it take to develop a SaaS application?',
-        description:
-          'Development timelines vary based on complexity and scope. A simple MVP can take 8-12 weeks, while enterprise-grade applications may take 6-12 months. We provide detailed project timelines during our initial consultation.',
-      },
-      {
-        title: 'Do you provide ongoing support and maintenance?',
-        description:
-          'Yes, we offer comprehensive support packages including 24/7 monitoring, security updates, performance optimization, feature enhancements, and technical support to ensure your SaaS solution continues to perform optimally.',
-      },
-      {
-        title: 'Can you help migrate legacy systems to modern SaaS?',
-        description:
-          'Absolutely. We specialize in digital transformation and can help modernize your legacy systems by migrating them to cloud-native SaaS architectures with improved performance, scalability, and maintainability.',
-      },
-      {
-        title: 'What is your pricing model for SaaS development?',
-        description:
-          'We offer flexible pricing models including fixed-price projects, time and materials, and retainer-based development. Pricing depends on project scope, complexity, and timeline. We provide transparent estimates after understanding your requirements.',
-      },
-    ]}
-  />
-
-  <!-- Stats Widget ****************** -->
-
-  <Stats
-    stats={[
-      { title: 'SaaS Projects Delivered', amount: '150+' },
-      { title: 'Technology Stack Expertise', amount: '25+' },
-      { title: 'Client Satisfaction Rate', amount: '99%' },
-      { title: 'Years in Tech Industry', amount: '8+' },
-    ]}
-  />
-
-  <!-- CallToAction Widget *********** -->
-
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Start Your Project',
-        href: '/contact',
-        icon: 'tabler:rocket',
-      },
-    ]}
-  >
-    <Fragment slot="title">
-      Ready to Build Your&nbsp;<br class="block sm:hidden" /><span class="sm:whitespace-nowrap"
-        >Next SaaS Solution?</span
+      </div>
+      <div
+        class="absolute -left-[15%] top-[30%] h-[36rem] w-[36rem] animate-drift rounded-full bg-[radial-gradient(circle_at_center,rgb(var(--ink)/0.07),transparent_60%)] blur-3xl [animation-delay:-9s]"
       >
-    </Fragment>
+      </div>
+      <div
+        class="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[rgb(var(--ink)/0.12)] to-transparent"
+      >
+      </div>
+    </div>
 
-    <Fragment slot="subtitle">
-      Transform your ideas into powerful SaaS applications. <br class="hidden md:inline" />Contact us today to discuss
-      your project!
-    </Fragment>
-  </CallToAction>
-</Layout>
+    <div class="container-site">
+      <p class="eyebrow flex animate-rise items-center gap-3">
+        <span class="inline-block h-1.5 w-1.5 rounded-full bg-accent"></span>
+        Somincola LLC — {SITE.tagline}
+      </p>
+
+      <h1
+        class="display mt-8 max-w-[14ch] animate-rise text-[3.4rem] [animation-delay:80ms] sm:text-[5.2rem] lg:text-[7.4rem]"
+      >
+        Quiet software, <em class="text-accent">carefully</em> made.
+      </h1>
+
+      <div class="mt-12 grid animate-rise gap-10 [animation-delay:180ms] md:mt-16 md:grid-cols-12 md:items-end">
+        <p class="max-w-xl text-lg leading-relaxed text-muted md:col-span-7 sm:text-xl">
+          We are an independent studio crafting focused, privacy-respecting apps for Apple platforms and the open social
+          web — software that respects your attention and keeps your data yours.
+        </p>
+        <div class="flex flex-wrap gap-3 md:col-span-5 md:justify-end">
+          <a href="#work" class="btn-primary">See our work</a>
+          <a href="/contact" class="btn-ghost group">
+            Get in touch <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statement -->
+  <section class="container-site py-24 sm:py-32" aria-labelledby="statement">
+    <div class="grid gap-8 md:grid-cols-12">
+      <p id="statement" class="eyebrow md:col-span-3" data-reveal>Our belief</p>
+      <p class="display text-[2rem] leading-[1.1] sm:text-[2.75rem] md:col-span-9" data-reveal>
+        The best software feels calm. It does one thing beautifully, gets out of your way, and is
+        <span class="text-muted">still there years from now.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section id="work" class="container-site py-12 sm:py-16" aria-labelledby="work-title">
+    <div class="flex items-end justify-between gap-6 border-b border-line pb-6" data-reveal>
+      <h2 id="work-title" class="display text-4xl sm:text-5xl">Selected work</h2>
+      <p class="eyebrow hidden sm:block">01 — 0{PRODUCTS.length}</p>
+    </div>
+
+    <div class="mt-10 grid gap-6 lg:grid-cols-2">
+      {
+        PRODUCTS.map((product, i) => {
+          const Plate = plates[product.name];
+          return (
+            <a
+              href={product.href}
+              target="_blank"
+              rel="noopener"
+              class="group block rounded-[1.75rem] border border-line bg-surface p-2.5 transition-shadow duration-500 hover:shadow-[0_30px_70px_-40px_rgb(0_0_0/0.45)]"
+              data-reveal
+              style={`--reveal-delay:${i * 120}ms`}
+            >
+              <div class="aspect-[4/3] overflow-hidden rounded-[1.35rem]">
+                <Plate />
+              </div>
+              <div class="flex items-start justify-between gap-6 px-4 pb-4 pt-6 sm:px-5">
+                <div>
+                  <p class="eyebrow">
+                    0{i + 1} · {product.kind}
+                  </p>
+                  <h3 class="mt-3 text-2xl font-medium tracking-[-0.02em]">{product.fullName}</h3>
+                  <p class="mt-2 max-w-md text-[15px] leading-relaxed text-muted">{product.summary}</p>
+                </div>
+                <span class="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line transition-colors duration-300 group-hover:border-ink group-hover:bg-ink group-hover:text-paper">
+                  <span class="arrow" aria-hidden="true">
+                    ↗
+                  </span>
+                  <span class="sr-only">Visit {product.linkLabel}</span>
+                </span>
+              </div>
+            </a>
+          );
+        })
+      }
+    </div>
+
+    <div
+      class="mt-6 flex flex-col gap-4 rounded-[1.75rem] border border-dashed border-ink/15 px-7 py-7 sm:flex-row sm:items-center sm:justify-between"
+      data-reveal
+    >
+      <p class="text-[15px] text-muted">
+        <span class="text-ink">More in the studio.</span> New apps for iPhone and Mac are in development.
+      </p>
+      <a href="/contact" class="link-underline text-sm">Hear about launches first</a>
+    </div>
+  </section>
+
+  <!-- Approach -->
+  <section id="approach" class="container-site py-24 sm:py-32" aria-labelledby="approach-title">
+    <div class="grid gap-8 md:grid-cols-12" data-reveal>
+      <p class="eyebrow md:col-span-3">Approach</p>
+      <h2 id="approach-title" class="display text-4xl sm:text-5xl md:col-span-9">
+        Four principles behind everything we ship.
+      </h2>
+    </div>
+
+    <div class="mt-16 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        principles.map((p, i) => (
+          <div class="border-t border-ink/80 pt-6" data-reveal style={`--reveal-delay:${i * 90}ms`}>
+            <p class="font-mono text-xs text-muted">0{i + 1}</p>
+            <h3 class="mt-8 text-xl font-medium tracking-[-0.02em]">{p.title}</h3>
+            <p class="mt-3 text-[15px] leading-relaxed text-muted">{p.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Capabilities -->
+  <section class="container-site py-12 sm:py-16" aria-labelledby="cap-title">
+    <div class="grid gap-8 md:grid-cols-12">
+      <div class="md:col-span-3" data-reveal>
+        <p id="cap-title" class="eyebrow">What we do</p>
+      </div>
+      <ul class="md:col-span-9">
+        {
+          capabilities.map((c, i) => (
+            <li
+              class="grid grid-cols-1 gap-1 border-b border-line py-6 first:border-t sm:grid-cols-12 sm:items-baseline sm:gap-6"
+              data-reveal
+              style={`--reveal-delay:${i * 70}ms`}
+            >
+              <span class="display text-3xl sm:col-span-5 sm:text-[2.4rem]">{c.area}</span>
+              <span class="text-[15px] text-muted sm:col-span-7">{c.detail}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Company -->
+  <section class="container-site py-24 sm:py-32" aria-labelledby="company-title">
+    <div class="grid gap-12 rounded-[2rem] border border-line bg-surface p-8 sm:p-12 md:grid-cols-12" data-reveal>
+      <div class="md:col-span-5">
+        <p class="eyebrow">The company</p>
+        <h2 id="company-title" class="display mt-6 text-4xl sm:text-5xl">Small by design.</h2>
+        <p class="mt-5 max-w-sm text-[15px] leading-relaxed text-muted">
+          Somincola is a founder-led company registered in Wyoming, United States, and working with people around the
+          world.
+        </p>
+        <a href="/about" class="link-underline mt-8 inline-block text-sm">More about us →</a>
+      </div>
+      <dl class="grid gap-x-8 text-sm sm:grid-cols-2 md:col-span-7">
+        {
+          [
+            ['Legal name', SITE.legalName],
+            ['Entity', 'Limited liability company'],
+            ['Jurisdiction', 'Wyoming, United States'],
+            ['Payments', 'Processed securely by Stripe'],
+            ['Registered address', fullAddress],
+            ['Contact', SITE.email],
+          ].map(([k, v]) => (
+            <div class="border-b border-line py-4">
+              <dt class="eyebrow">{k}</dt>
+              <dd class="mt-1.5 text-[15px]">{v}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="container-site pb-8 pt-8" aria-labelledby="cta-title">
+    <div class="text-center" data-reveal>
+      <p class="eyebrow">Say hello</p>
+      <h2 id="cta-title" class="display mx-auto mt-6 max-w-[16ch] text-5xl sm:text-7xl">
+        Have something in mind? <em class="text-accent">Let’s talk.</em>
+      </h2>
+      <div class="mt-10 flex flex-wrap justify-center gap-3">
+        <a href="/contact" class="btn-primary">Start a conversation</a>
+        <a href={`mailto:${SITE.email}`} class="btn-ghost">{SITE.email}</a>
+      </div>
+    </div>
+  </section>
+</Base>

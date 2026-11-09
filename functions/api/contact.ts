@@ -10,7 +10,10 @@ type ContactPayload = {
   name?: string;
   email?: string;
   message?: string;
+  company?: string; // honeypot — real visitors never fill this in
 };
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const jsonResponse = (body: Record<string, unknown>, status = 200): Response =>
   new Response(JSON.stringify(body), {
@@ -34,13 +37,27 @@ export const onRequestPost = async (context: { request: Request; env: Env }): Pr
     return jsonResponse({ ok: false, message: 'Invalid content type' }, 400);
   }
 
-  const payload = (await context.request.json()) as ContactPayload;
+  let payload: ContactPayload;
+  try {
+    payload = (await context.request.json()) as ContactPayload;
+  } catch {
+    return jsonResponse({ ok: false, message: 'Invalid JSON' }, 400);
+  }
   const name = String(payload.name || '').trim();
   const email = String(payload.email || '').trim();
   const message = String(payload.message || '').trim();
 
+  if (String(payload.company || '').trim()) {
+    // Silently accept bot submissions without sending anything.
+    return jsonResponse({ ok: true }, 200);
+  }
+
   if (!name || !email || !message) {
     return jsonResponse({ ok: false, message: 'Missing required fields' }, 400);
+  }
+
+  if (!EMAIL_RE.test(email) || name.length > 200 || message.length > 10000) {
+    return jsonResponse({ ok: false, message: 'Invalid input' }, 400);
   }
 
   if (!context.env.RESEND_API_KEY || !context.env.CONTACT_TO_EMAIL || !context.env.CONTACT_FROM_EMAIL) {
@@ -53,7 +70,7 @@ export const onRequestPost = async (context: { request: Request; env: Env }): Pr
     from: context.env.CONTACT_FROM_EMAIL,
     to: [context.env.CONTACT_TO_EMAIL],
     replyTo: email,
-    subject: `New website inquiry from ${name}`,
+    subject: `New website inquiry from ${name.replace(/[\r\n]+/g, ' ')}`,
     html: [
       '<h2>New contact form submission</h2>',
       `<p><strong>Name:</strong> ${escapeHtml(name)}</p>`,

@@ -1,90 +1,56 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for AI coding agents working in this repository.
 
-## Project Overview
+## Project
 
-This is an **AstroWind** project - a website template built with **Astro 5.0** and **Tailwind CSS**. It's a production-ready static site generator focused on performance, SEO, and modern web practices.
+Company website for **Somincola LLC** (https://somincola.com) — an independent software studio.
+Static site built with **Astro** + **Tailwind CSS 3**, deployed on **Cloudflare Pages** (the `functions/` folder holds
+Pages Functions).
 
-## Development Commands
+## Commands
 
-| Command                  | Purpose                                            |
-| ------------------------ | -------------------------------------------------- |
-| `npm install`            | Install dependencies                               |
-| `npm run dev`            | Start development server at localhost:4321         |
-| `npm run build`          | Build production site to ./dist/                   |
-| `npm run preview`        | Preview production build locally                   |
-| `npm run check`          | Run comprehensive checks (Astro, ESLint, Prettier) |
-| `npm run fix`            | Auto-fix ESLint and format with Prettier           |
-| `npm run check:astro`    | Run Astro type checking                            |
-| `npm run check:eslint`   | Run ESLint linting                                 |
-| `npm run check:prettier` | Check Prettier formatting                          |
+| Command           | Purpose                                         |
+| ----------------- | ----------------------------------------------- |
+| `npm install`     | Install dependencies                            |
+| `npm run dev`     | Dev server at localhost:4321                    |
+| `npm run build`   | Build to `./dist/`                              |
+| `npm run preview` | Preview the production build                    |
+| `npm run check`   | Astro type check + ESLint + Prettier (CI gate)  |
+| `npm run fix`     | Auto-fix ESLint issues and format with Prettier |
 
-## Architecture Overview
-
-### Core Configuration
-
-- **Main config**: `src/config.yaml` - Central configuration for site metadata, blog settings, analytics, and UI theme
-- **Astro config**: `astro.config.ts` - Build configuration with integrations for Tailwind, MDX, Sitemap, Icons
-- **Navigation**: `src/navigation.ts` - Header and footer navigation structure
-
-### Directory Structure
+## Structure
 
 ```
 src/
-├── components/           # Reusable components
-│   ├── blog/            # Blog-specific components
-│   ├── common/          # Common utilities (Analytics, Meta, etc.)
-│   ├── ui/              # UI building blocks
-│   └── widgets/         # Page section components
-├── content/             # Content collections (Astro Content API)
-├── data/post/          # Blog posts (MDX/Markdown)
-├── layouts/            # Page layout templates
-├── pages/              # File-based routing
-├── utils/              # Utility functions
-└── assets/             # Static assets (images, styles)
+├── site.ts             # Single source of truth: company info, nav, products
+├── styles/global.css   # Design tokens (CSS variables, light/dark) + component classes
+├── layouts/
+│   ├── Base.astro      # <head>, SEO, header/footer, scroll-reveal script
+│   └── Legal.astro     # Layout for markdown legal pages
+├── components/         # Seo, Header, Footer, Logo, PageHero, home/* illustrations
+└── pages/              # index, about, contact, privacy.md, terms.md, 404
+functions/api/contact.ts  # Cloudflare Pages Function: contact form → Resend
+public/                   # favicons, og.png, robots.txt, _headers, _redirects
 ```
 
-### Component Architecture
+## Design system
 
-- **Widgets**: Large page sections (Hero, Features, Footer, etc.)
-- **UI Components**: Reusable elements (Button, Headline, Form, etc.)
-- **Common Components**: Shared utilities (Analytics, Metadata, Theme Toggle)
-- **Blog Components**: Blog-specific functionality (Grid, Pagination, Tags)
+- Colors are RGB triplets in CSS variables (`--paper`, `--surface`, `--ink`, `--muted`, `--accent`) and switch
+  automatically with `prefers-color-scheme`. Use Tailwind tokens `bg-paper`, `text-ink`, `text-muted`, `border-line`,
+  `text-accent` — never hard-coded grays.
+- Type: Instrument Serif (`.display`, headings) + Inter Variable (body) + system mono (`.eyebrow` labels).
+- Reusable classes: `.container-site`, `.eyebrow`, `.display`, `.btn-primary`, `.btn-ghost`, `.link-underline`.
+- Add `data-reveal` to an element for a subtle scroll-in animation (respects reduced motion; visible without JS).
 
-### Content Management
+## SEO
 
-- **Blog posts** are stored in `src/data/post/` as MDX/Markdown files
-- **Content schema** defined in `src/content/config.ts` with Zod validation
-- **Astro Content Collections** for type-safe content handling
+- Every page passes `title` / `description` (and optional `jsonLd`) to `Base.astro`; `Seo.astro` renders canonical,
+  Open Graph, Twitter and JSON-LD tags. Organization schema lives on the home page.
+- `build.format: 'file'` + `trailingSlash: 'never'` keep URLs clean (`/about`) on Cloudflare Pages.
+- Legacy URLs are 301-redirected in `public/_redirects`.
 
-### Styling System
+## Contact form
 
-- **Tailwind CSS** with custom configuration in `tailwind.config.js`
-- **CSS custom properties** for theme colors (primary, secondary, accent)
-- **Dark mode** support with `class` strategy
-- **Custom styles** in `src/components/CustomStyles.astro`
-
-### Key Features
-
-- **Static site generation** (output: 'static')
-- **Blog system** with categories, tags, and related posts
-- **SEO optimization** with Open Graph and Twitter cards
-- **Image optimization** using Astro Assets and Unpic
-- **Icon system** using Astro Icon with Tabler and Flat Color Icons
-- **Analytics ready** (Google Analytics, Splitbee support)
-
-### Utility Functions
-
-- **Permalinks**: `src/utils/permalinks.ts` - URL generation
-- **Blog utilities**: `src/utils/blog.ts` - Post filtering and sorting
-- **Image optimization**: `src/utils/images.ts` - Image processing helpers
-- **Frontmatter plugins**: Custom remark/rehype plugins for reading time and responsive tables
-
-## Development Notes
-
-- The site uses **file-based routing** in `src/pages/`
-- **Blog functionality** requires `prerender = true` (not fully SSR compatible in current version)
-- **Custom integration** in `vendor/integration` extends Astro functionality
-- **Type definitions** in `src/types.d.ts` for custom interfaces
-- **Environment variables** and site configuration centralized in `src/config.yaml`
+`POST /api/contact` (JSON `{ name, email, message, company }`; `company` is a honeypot). Requires Cloudflare Pages env
+vars `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`.

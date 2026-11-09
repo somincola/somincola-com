@@ -1,9 +1,20 @@
 ---
-import { SITE } from '~/config';
+export interface Props {
+  class?: string;
+  withWordmark?: boolean;
+}
+const { class: className = '', withWordmark = true } = Astro.props;
 ---
 
-<span
-  class="self-center ml-2 rtl:ml-0 rtl:mr-2 text-2xl md:text-xl font-bold text-gray-900 whitespace-nowrap dark:text-white"
->
-  🚀 {SITE?.name}
+<span class:list={['inline-flex items-center gap-2.5', className]}>
+  <svg viewBox="0 0 32 32" class="h-7 w-7 shrink-0" aria-hidden="true">
+    <rect width="32" height="32" rx="9" fill="currentColor"></rect>
+    <path
+      d="M20.04 9.53A4.5 4.5 0 1 0 16 16a4.5 4.5 0 1 1-4.04 6.47"
+      fill="none"
+      stroke="rgb(var(--paper))"
+      stroke-width="2.6"
+      stroke-linecap="round"></path>
+  </svg>
+  {withWordmark && <span class="text-[15px] font-semibold tracking-[-0.02em]">Somincola</span>}
 </span>

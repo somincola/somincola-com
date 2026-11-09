@@ -1,0 +1,30 @@
+---
+export interface Props {
+  eyebrow: string;
+  title: string;
+  lead?: string;
+}
+const { eyebrow, title, lead } = Astro.props;
+---
+
+<section class="grain relative isolate overflow-hidden pb-16 pt-36 sm:pb-20 sm:pt-44">
+  <div
+    class="pointer-events-none absolute -right-[15%] -top-[30%] -z-10 h-[36rem] w-[36rem] animate-drift rounded-full bg-[radial-gradient(circle_at_center,rgb(var(--accent)/0.16),transparent_62%)] blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="container-site">
+    <p class="eyebrow flex animate-rise items-center gap-3">
+      <span class="inline-block h-1.5 w-1.5 rounded-full bg-accent"></span>{eyebrow}
+    </p>
+    <h1 class="display mt-7 max-w-[18ch] animate-rise text-5xl [animation-delay:80ms] sm:text-7xl" set:html={title} />
+    {
+      lead && (
+        <p class="mt-8 max-w-2xl animate-rise text-lg leading-relaxed text-muted [animation-delay:160ms] sm:text-xl">
+          {lead}
+        </p>
+      )
+    }
+    <slot />
+  </div>
+</section>

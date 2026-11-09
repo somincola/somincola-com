@@ -1,221 +1,119 @@
 ---
-import Features2 from '~/components/widgets/Features2.astro';
-import Features3 from '~/components/widgets/Features3.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Stats from '~/components/widgets/Stats.astro';
-import Steps2 from '~/components/widgets/Steps2.astro';
-import Layout from '~/layouts/PageLayout.astro';
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import { SITE, PRODUCTS, fullAddress } from '~/site';
 
-const metadata = {
-  title: 'About us',
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  url: `${SITE.url}/about`,
+  name: 'About Somincola',
+  about: { '@id': `${SITE.url}/#organization` },
 };
 ---
 
-<Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
-
-  <Hero
-    tagline="About Somincola"
-    image={{
-      src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Software Development Team',
-    }}
-  >
-    <Fragment slot="title">
-      Leading SaaS Development <br />
-      <span class="text-accent dark:text-white">& Technology Innovation</span>
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      Somincola is a cutting-edge technology company specializing in custom SaaS development and strategic technology
-      consulting. Our expert team of software engineers, cloud architects, and technical consultants transforms
-      businesses through innovative digital solutions and scalable software platforms.
-    </Fragment>
-  </Hero>
-
-  <!-- Stats Widget ****************** -->
-
-  <Stats
-    title="Our Technology Impact"
-    stats={[
-      { title: 'SaaS Applications Built', amount: '150+' },
-      { title: 'Cloud Deployments', amount: '200+' },
-      { title: 'Technology Partners', amount: '12' },
-      { title: 'Uptime Guarantee', amount: '99.9%' },
-    ]}
+<Base
+  title="About"
+  description="Somincola LLC is a founder-led, independent software company registered in Wyoming, USA. We design, build and operate focused apps and services for Apple platforms and the open social web."
+  jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="About"
+    title="An independent studio for <em class='text-accent'>considered</em> software."
+    lead="Somincola is a founder-led software company. We design, build and operate our own products end to end — from native apps to the servers behind them."
   />
 
-  <!-- Features3 Widget ************** -->
+  <section class="container-site py-16 sm:py-24">
+    <div class="grid gap-10 md:grid-cols-12">
+      <p class="eyebrow md:col-span-3" data-reveal>Why we exist</p>
+      <div class="space-y-6 text-lg leading-relaxed text-ink/85 md:col-span-8 sm:text-xl" data-reveal>
+        <p>
+          Too much of today’s software is designed to capture attention rather than serve it. We started Somincola to
+          make the opposite: tools that are quiet, fast and honest about what they do.
+        </p>
+        <p class="text-muted">
+          Staying small is a deliberate choice. It lets us move carefully, keep our products free of advertising and
+          tracking, and answer every message ourselves.
+        </p>
+      </div>
+    </div>
+  </section>
 
-  <Features3
-    title="Our Core Expertise"
-    subtitle="We leverage cutting-edge technologies and proven methodologies to deliver scalable SaaS solutions. Our multi-disciplinary team excels in modern software development and cloud architecture."
-    columns={3}
-    isBeforeContent={true}
-    items={[
-      {
-        title: 'SaaS Architecture & Development',
-        description:
-          'Full-stack development of scalable SaaS applications using modern frameworks, microservices architecture, and cloud-native technologies.',
-        icon: 'tabler:cloud',
-      },
-      {
-        title: 'DevOps & Cloud Infrastructure',
-        description:
-          'Expert cloud architecture design, CI/CD pipelines, containerization with Docker/Kubernetes, and automated deployment strategies.',
-        icon: 'tabler:server-2',
-      },
-      {
-        title: 'Data Engineering & Analytics',
-        description:
-          'Big data processing, real-time analytics, machine learning integration, and business intelligence dashboard development.',
-        icon: 'tabler:database',
-      },
-    ]}
-  />
+  <section class="container-site py-16 sm:py-24">
+    <div class="grid gap-10 md:grid-cols-12">
+      <p class="eyebrow md:col-span-3" data-reveal>What we make</p>
+      <ul class="md:col-span-9">
+        {
+          PRODUCTS.map((p) => (
+            <li class="border-b border-line first:border-t" data-reveal>
+              <a
+                href={p.href}
+                target="_blank"
+                rel="noopener"
+                class="group grid gap-2 py-8 sm:grid-cols-12 sm:items-baseline sm:gap-6"
+              >
+                <span class="display text-3xl sm:col-span-5 sm:text-4xl">{p.fullName}</span>
+                <span class="text-[15px] leading-relaxed text-muted sm:col-span-6">{p.summary}</span>
+                <span class="arrow text-muted sm:col-span-1 sm:text-right" aria-hidden="true">
+                  ↗
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
 
-  <!-- Features3 Widget ************** -->
+  <section class="container-site py-16 sm:py-24">
+    <div class="grid gap-10 md:grid-cols-12">
+      <p class="eyebrow md:col-span-3" data-reveal>How we work</p>
+      <div class="grid gap-x-10 gap-y-10 sm:grid-cols-2 md:col-span-9">
+        {
+          [
+            ['Product first', 'We build and maintain our own products, so every decision is made for the long run.'],
+            ['Remote by nature', 'We work asynchronously with collaborators across time zones and languages.'],
+            ['Open standards', 'We favor open protocols like ActivityPub, so people are never locked in.'],
+            ['Direct support', 'Questions go straight to the people who build the product — no ticket mazes.'],
+          ].map(([title, body]) => (
+            <div data-reveal>
+              <h3 class="text-lg font-medium tracking-[-0.01em]">{title}</h3>
+              <p class="mt-2 text-[15px] leading-relaxed text-muted">{body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
-  <Features3
-    columns={3}
-    isAfterContent={true}
-    items={[
-      {
-        title: 'Frontend Technologies',
-        description:
-          'React, Vue.js, Angular, Next.js, TypeScript, Tailwind CSS, and modern component libraries for responsive user interfaces.',
-        icon: 'tabler:brand-react',
-      },
-      {
-        title: 'Backend & APIs',
-        description:
-          'Node.js, Python, Java, GraphQL, RESTful APIs, microservices, serverless functions, and event-driven architectures.',
-        icon: 'tabler:api',
-      },
-      {
-        title: 'Cloud Platforms',
-        description:
-          'AWS, Azure, Google Cloud Platform, serverless computing, container orchestration, and multi-cloud deployment strategies.',
-        icon: 'tabler:cloud-computing',
-      },
-      {
-        title: 'Database Solutions',
-        description:
-          'PostgreSQL, MongoDB, Redis, Elasticsearch, data warehousing, and distributed database architectures for scalability.',
-        icon: 'tabler:database-import',
-      },
-      {
-        title: 'Security & Compliance',
-        description:
-          'Enterprise-grade security, OAuth, GDPR compliance, data encryption, security audits, and vulnerability assessments.',
-        icon: 'tabler:shield-lock',
-      },
-      {
-        title: 'AI & Machine Learning',
-        description:
-          'TensorFlow, PyTorch, natural language processing, predictive analytics, and AI-powered automation integration.',
-        icon: 'tabler:brain',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
-      alt: 'Technology Stack',
-    }}
-  />
-
-  <!-- Steps2 Widget ****************** -->
-
-  <Steps2
-    title="Our Development Philosophy"
-    subtitle="At Somincola, our approach to technology and client relationships is built on these fundamental principles that drive innovation and ensure project success."
-    items={[
-      {
-        title: 'Code Quality & Best Practices',
-        description:
-          'We follow industry best practices including clean code principles, comprehensive testing, code reviews, and documentation to ensure maintainable, scalable solutions.',
-      },
-      {
-        title: 'Agile & Collaborative Development',
-        description:
-          'Our iterative development process emphasizes client collaboration, frequent feedback, rapid prototyping, and adaptive planning to deliver value quickly.',
-      },
-      {
-        title: 'Innovation & Continuous Learning',
-        description:
-          'Our team stays current with emerging technologies, attends conferences, contributes to open source, and continuously evolves our technical expertise.',
-      },
-    ]}
-  />
-
-  <!-- Steps2 Widget ****************** -->
-
-  <Steps2
-    title="Why Choose Somincola"
-    subtitle="Our technical expertise, proven methodologies, and commitment to innovation make us the ideal partner for your SaaS development and technology transformation needs."
-    isReversed={true}
-    callToAction={{
-      text: 'Start Your Project',
-      href: '/contact',
-    }}
-    items={[
-      {
-        title: 'Technical Excellence & Scalability',
-        description:
-          'Our solutions handle enterprise-level traffic with 99.9% uptime, robust security, and auto-scaling capabilities that grow with your business.',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Full-Stack Development Team',
-        description:
-          'From UI/UX designers to DevOps engineers, our multidisciplinary team covers every aspect of modern SaaS development and deployment.',
-        icon: 'tabler:users',
-      },
-      {
-        title: 'Cutting-Edge Technology Stack',
-        description:
-          'We leverage the latest technologies, frameworks, and cloud services to build future-proof applications that remain competitive and maintainable.',
-        icon: 'tabler:cpu',
-      },
-    ]}
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Our Location"
-    tagline="Find us"
-    columns={2}
-    items={[
-      {
-        title: 'Headquarters',
-        description: '30 N Gould St Ste N, Sheridan, WY 82801 US',
-      },
-      {
-        title: 'Service Area',
-        description: 'Serving clients nationwide across the United States',
-      },
-    ]}
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Get Started Today"
-    tagline="Contact us"
-    columns={2}
-    items={[
-      {
-        title: 'Email Consultation',
-        description:
-          'Send us your questions and business requirements via email at contact@somincola.com for detailed consultation.',
-        icon: 'tabler:mail',
-      },
-      {
-        title: 'Business Hours',
-        description:
-          'Our professional team is available Monday through Friday, 9:00 AM to 5:00 PM (MST) to assist with your business needs.',
-        icon: 'tabler:clock',
-      },
-    ]}
-  />
-</Layout>
+  <section class="container-site py-16 sm:py-24" aria-labelledby="details">
+    <div class="grid gap-10 md:grid-cols-12">
+      <h2 id="details" class="eyebrow md:col-span-3" data-reveal>Company details</h2>
+      <dl class="grid gap-x-10 sm:grid-cols-2 md:col-span-9" data-reveal>
+        {
+          [
+            ['Legal name', SITE.legalName],
+            ['Entity type', 'Single-member limited liability company'],
+            ['State of formation', 'Wyoming, United States'],
+            ['Registered address', fullAddress],
+            ['General enquiries', SITE.email],
+            ['Customer support', SITE.email],
+          ].map(([k, v]) => (
+            <div class="border-b border-line py-5">
+              <dt class="eyebrow">{k}</dt>
+              <dd class="mt-1.5 text-base">
+                {v.includes('@') ? (
+                  <a class="link-underline" href={`mailto:${v}`}>
+                    {v}
+                  </a>
+                ) : (
+                  v
+                )}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+</Base>
