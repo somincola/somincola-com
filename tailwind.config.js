@@ -16,7 +16,6 @@ export default {
       },
       fontFamily: {
         sans: ['"Inter Variable"', ...defaultTheme.fontFamily.sans],
-        serif: ['"Instrument Serif"', 'ui-serif', 'Georgia', 'serif'],
         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       letterSpacing: {

@@ -4,28 +4,28 @@
 
 @layer base {
   :root {
-    --paper: 247 246 242;
+    --paper: 250 250 250;
     --surface: 255 255 255;
-    --ink: 21 21 19;
-    --muted: 104 102 96;
-    --accent: 168 80 47;
+    --ink: 10 10 12;
+    --muted: 107 107 116;
+    --accent: 0 102 255;
     color-scheme: light;
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --paper: 13 13 12;
-      --surface: 23 23 21;
-      --ink: 236 234 228;
-      --muted: 152 149 141;
-      --accent: 226 133 96;
+      --paper: 9 9 11;
+      --surface: 19 19 22;
+      --ink: 244 244 245;
+      --muted: 150 150 160;
+      --accent: 77 148 255;
       color-scheme: dark;
     }
   }
 
   html {
     @apply bg-paper text-ink antialiased;
-    font-feature-settings: 'ss01', 'cv11';
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     text-rendering: optimizeLegibility;
     scroll-behavior: smooth;
     scroll-padding-top: 6rem;
@@ -69,7 +69,10 @@
   }
 
   .display {
-    @apply font-serif font-normal leading-[0.95] tracking-[-0.02em];
+    @apply font-semibold leading-[1.02] tracking-[-0.045em];
+  }
+  .display em {
+    @apply not-italic text-muted;
   }
 
   .hairline {
@@ -106,23 +109,39 @@
     transform: translate(3px, -3px);
   }
 
-  .grain::after {
+  /* Hairline grid that fades out toward the edges. */
+  .hero-grid::before {
     content: '';
     position: absolute;
     inset: 0;
+    z-index: -1;
     pointer-events: none;
-    opacity: 0.1;
-    -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent);
-    mask-image: linear-gradient(to bottom, #000 40%, transparent);
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    background-image:
+      linear-gradient(to right, rgb(var(--ink) / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--ink) / 0.06) 1px, transparent 1px);
+    background-size: 64px 64px;
+    background-position: center top;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
   }
 }
 
 /* Scroll reveal: only hide when JS is available, so content never disappears without it. */
 @media (prefers-color-scheme: dark) {
-  .grain::after {
-    opacity: 0.3;
-    mix-blend-mode: soft-light;
+  /* Hairline grid that fades out toward the edges. */
+  .hero-grid::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, rgb(var(--ink) / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--ink) / 0.06) 1px, transparent 1px);
+    background-size: 64px 64px;
+    background-position: center top;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
   }
 }
 

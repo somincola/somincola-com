@@ -85,14 +85,10 @@ const jsonLd = [
   jsonLd={jsonLd}
 >
   <!-- Hero -->
-  <section class="grain relative isolate overflow-hidden pb-24 pt-36 sm:pb-32 sm:pt-44 lg:pt-52">
+  <section class="hero-grid relative isolate overflow-hidden pb-24 pt-36 sm:pb-32 sm:pt-44 lg:pt-52">
     <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
       <div
         class="absolute -right-[10%] -top-[20%] h-[42rem] w-[42rem] animate-drift rounded-full bg-[radial-gradient(circle_at_center,rgb(var(--accent)/0.20),transparent_62%)] blur-3xl"
-      >
-      </div>
-      <div
-        class="absolute -left-[15%] top-[30%] h-[36rem] w-[36rem] animate-drift rounded-full bg-[radial-gradient(circle_at_center,rgb(var(--ink)/0.07),transparent_60%)] blur-3xl [animation-delay:-9s]"
       >
       </div>
       <div
@@ -108,9 +104,9 @@ const jsonLd = [
       </p>
 
       <h1
-        class="display mt-8 max-w-[14ch] animate-rise text-[3.4rem] [animation-delay:80ms] sm:text-[5.2rem] lg:text-[7.4rem]"
+        class="display mt-8 max-w-[15ch] animate-rise text-[3rem] [animation-delay:80ms] sm:text-[4.5rem] lg:text-[6.25rem]"
       >
-        Quiet software, <em class="text-accent">carefully</em> made.
+        Quiet software, <em>carefully made.</em>
       </h1>
 
       <div class="mt-12 grid animate-rise gap-10 [animation-delay:180ms] md:mt-16 md:grid-cols-12 md:items-end">
@@ -132,7 +128,7 @@ const jsonLd = [
   <section class="container-site py-24 sm:py-32" aria-labelledby="statement">
     <div class="grid gap-8 md:grid-cols-12">
       <p id="statement" class="eyebrow md:col-span-3" data-reveal>Our belief</p>
-      <p class="display text-[2rem] leading-[1.1] sm:text-[2.75rem] md:col-span-9" data-reveal>
+      <p class="text-[1.75rem] font-medium leading-[1.2] tracking-[-0.03em] sm:text-[2.4rem] md:col-span-9" data-reveal>
         The best software feels calm. It does one thing beautifully, gets out of your way, and is
         <span class="text-muted">still there years from now.</span>
       </p>
@@ -198,7 +194,7 @@ const jsonLd = [
   <section id="approach" class="container-site py-24 sm:py-32" aria-labelledby="approach-title">
     <div class="grid gap-8 md:grid-cols-12" data-reveal>
       <p class="eyebrow md:col-span-3">Approach</p>
-      <h2 id="approach-title" class="display text-4xl sm:text-5xl md:col-span-9">
+      <h2 id="approach-title" class="display text-4xl sm:text-[2.75rem] md:col-span-9">
         Four principles behind everything we ship.
       </h2>
     </div>
@@ -230,7 +226,7 @@ const jsonLd = [
               data-reveal
               style={`--reveal-delay:${i * 70}ms`}
             >
-              <span class="display text-3xl sm:col-span-5 sm:text-[2.4rem]">{c.area}</span>
+              <span class="text-2xl font-medium tracking-[-0.03em] sm:col-span-5 sm:text-[1.75rem]">{c.area}</span>
               <span class="text-[15px] text-muted sm:col-span-7">{c.detail}</span>
             </li>
           ))
@@ -275,8 +271,8 @@ const jsonLd = [
   <section class="container-site pb-8 pt-8" aria-labelledby="cta-title">
     <div class="text-center" data-reveal>
       <p class="eyebrow">Say hello</p>
-      <h2 id="cta-title" class="display mx-auto mt-6 max-w-[16ch] text-5xl sm:text-7xl">
-        Have something in mind? <em class="text-accent">Let’s talk.</em>
+      <h2 id="cta-title" class="display mx-auto mt-6 max-w-[18ch] text-5xl sm:text-6xl">
+        Have something in mind? <em>Let’s talk.</em>
       </h2>
       <div class="mt-10 flex flex-wrap justify-center gap-3">
         <a href="/contact" class="btn-primary">Start a conversation</a>
